@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>African Deals Domain</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .glow-text {
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    }
+    .gradient-bg {
+      background: linear-gradient(45deg, #030128, #1a0b5e, #030128);
+      background-size: 200% 200%;
+      animation: gradientShift 10s ease infinite;
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+    }
+    .module-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateY(0deg); }
+      50% { transform: translateY(-20px) rotateY(10deg); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-[#030128] text-white overflow-x-hidden relative">
+  <canvas id="canvas-background" class="absolute top-0 left-0 w-full h-screen z-0 opacity-30 hidden"></canvas>
+
+  <div class="fixed top-4 right-4 z-20">
+    <select id="language" class="bg-[#00ffcc] text-[#030128] p-2 rounded-lg focus:outline-none" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="rw">Kinyarwanda</option>
+      <option value="fr">French</option>
+    </select>
+  </div>
+
+<nav class="fixed top-0 w-full bg-black bg-opacity-80 backdrop-blur-md z-10">
+  <div class="max-w-5xl mx-auto flex items-center justify-center py-4">
+    <a href="#home" class="flex items-center mr-20">
+      <img src="logo.jpg" alt="African Deals Domain Logo" class="h-10 w-auto rounded-full bg-white bg-opacity-10 p-1 shadow-[0_0_10px_rgba(0,255,204,0.5)] hover:shadow-[0_0_20px_rgba(0,255,204,0.8)] transition-all duration-300 animate-pulse-logo" style="animation: pulse-logo 2s infinite ease-in-out;">
+    </a>
+    <ul class="flex justify-center gap-8">
+      <li><a href="#home" class="text-lg text-white hover:text-[#00ffcc] transition-all duration-300 transform hover:scale-110" data-en="Home" data-rw="Ahabanza" data-fr="Accueil">Home</a></li>
+      <li><a href="#vision" class="text-lg text-white hover:text-[#00ffcc] transition-all duration-300 transform hover:scale-110" data-en="Vision & Mission" data-rw="Icyerekezo & Inshingano" data-fr="Vision et Mission">Vision & Mission</a></li>
+      <li><a href="#modules" class="text-lg text-white hover:text-[#00ffcc] transition-all duration-300 transform hover:scale-110" data-en="Modules" data-rw="Ibice" data-fr="Modules">Modules</a></li>
+      <li><a href="#impact" class="text-lg text-white hover:text-[#00ffcc] transition-all duration-300 transform hover:scale-110" data-en="Impact" data-rw="Ingaruka" data-fr="Impact">Impact</a></li>
+      <li><a href="#contact" class="text-lg text-white hover:text-[#00ffcc] transition-all duration-300 transform hover:scale-110" data-en="Contact" data-rw="Twandikire" data-fr="Contactez-nous">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+<style>
+  @keyframes pulse-logo {
+    0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 204, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.7); }
+  }
+</style>
+<script>
+  // Smooth scrolling for navigation links with debugging
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        console.error(`Navigation error: Element with ID "${targetId}" not found.`);
+      }
+    });
+  });
+
+  // Language switching function
+  function setLanguage(lang) {
+    document.querySelectorAll('[data-' + lang + ']').forEach(element => {
+      const text = element.getAttribute('data-' + lang);
+      if (text) {
+        element.textContent = text;
+      }
+    });
+  }
+
+  // Example: Call setLanguage('fr') to switch to French
+  // Replace with your language toggle logic (e.g., button click)
+</script>
+  <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-4 gradient-bg">
+    <h1 class="text-5xl md:text-7xl font-['Orbitron'] glow-text animate-pulse" data-en="African Deals Domain" data-rw="African Deals Domain" data-fr="African Deals Domain">African Deals Domain</h1>
+    <p class="text-xl md:text-2xl mt-4 max-w-2xl animate-fadeIn" data-en="Empowering Rwanda with Digital Commerce, Jobs, and Education" data-rw="Gushoboza u Rwanda mu bucuruzi bwa digitale, imirimo, n’uburezi" data-fr="Renforcer le Rwanda avec le commerce numérique, l'emploi et l'éducation">Empowering Rwanda with Digital Commerce, Jobs, and Education</p>
+    <a href="#vision" class="mt-6 bg-[#00ffcc] text-[#030128] px-6 py-3 rounded-full font-bold text-lg hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 transform hover:scale-105" data-en="Discover Our Vision" data-rw="Menya Icyerekezo Cyacu" data-fr="Découvrez Notre Vision">Discover Our Vision</a>
+  </section>
+
+  <section id="vision" class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-4xl font-['Orbitron'] text-center glow-text mb-12" data-en="Our Vision & Mission" data-rw="Icyerekezo & Inshingano Zacu" data-fr="Notre Vision & Mission">Our Vision & Mission</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <h3 class="text-2xl font-bold" data-en="Vision" data-rw="Icyerekezo" data-fr="Vision">Vision</h3>
+        <p class="mt-2" data-en="To empower every Rwandan with opportunities to learn, earn, and grow through a transformative digital platform.Born to run a Business" data-rw="Gushoboza buri Munyarwanda n’ubushobozi bwo kwiga, kwunguka, no gukura hakoreshejwe urubuga rwa digitale rwashyiraho ibintu bishya." data-fr="Autonomiser chaque Rwandais avec des opportunités d'apprendre, de gagner et de grandir grâce à une plateforme numérique transformative.">To empower every Rwandan with opportunities to learn, earn, Born to run a Business, and grow through a transformative digital platform.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <h3 class="text-2xl font-bold" data-en="Mission" data-rw="Inshingano" data-fr="Mission">Mission</h3>
+        <p class="mt-2" data-en="To connect communities through digital commerce, job opportunities, and education, fostering economic growth and digital inclusion across Rwanda." data-rw="Guhuza amakoperative mu bucuruzi bwa digitale, ubushobozi bw’akazi, n’uburezi, bigatuma habaho iterambere ry’ubukungu n’ubwinjirizwa bwa digitale mu Rwanda." data-fr="Connecter les communautés par le commerce numérique, les opportunités d'emploi et l'éducation, favorisant la croissance économique et l'inclusion numérique à travers le Rwanda.">To connect communities through digital commerce, job opportunities, and education, fostering economic growth and digital inclusion across Rwanda.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <h3 class="text-2xl font-bold" data-en="Objectives" data-rw="Intego" data-fr="Objectifs">Objectives</h3>
+        <p class="mt-2" data-en="Reduce unemployment, bridge skill gaps, expand market access, and ensure digital inclusion for all Rwandans, including rural users." data-rw="Gukemura burangare, guhuza ibura ry’ubumenyi, kwagura isoko, no kwemerera buri Munyarwanda kwinjira mu digitale, harimo n’abaturage b’icyaro." data-fr="Réduire le chômage, combler les écarts de compétences, élargir l'accès au marché et assurer l'inclusion numérique pour tous les Rwandais, y compris les utilisateurs ruraux.">Reduce unemployment, bridge skill gaps, expand market access, and ensure digital inclusion for all Rwandans, including rural users.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <h3 class="text-2xl font-bold" data-en="Goals" data-rw="Intego Zisanzwe" data-fr="Objectifs">Goals</h3>
+        <p class="mt-2" data-en="Launch a scalable platform starting in Rwanda, expand to East Africa, and empower millions through accessible digital tools and community engagement." data-rw="Gutangiza urubuga rwaguka uhereye mu Rwanda, kwaguka muri Afrika y’Iburasirazuba,,no gushoboza miliyoni z’abantu hakoreshejwe ibikoresho bya digitale byoroshye n’ubufatanye bw’umuryango." data-fr="Lancer une plateforme évolutive commençant par le Rwanda, s'étendre à l'Afrique de l'Est et autonomiser des millions grâce à des outils numériques accessibles et à l'engagement communautaire.">Launch a scalable platform starting in Rwanda, expand to East Africa, and empower millions through accessible digital tools and community engagement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="modules" class="py-16 px-4 max-w-6xl mx-auto gradient-bg">
+    <h2 class="text-4xl font-['Orbitron'] text-center glow-text mb-12" data-en="Our Modules" data-rw="Ibice Byacu" data-fr="Nos Modules">Our Modules</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+        <img src="podcast.jpeg" alt="Broadcasting" class="module-image">
+        <i class="fas fa-broadcast-tower text-4xl text-[#00ffcc] mb-4 animate-pulse"></i>
+        <h3 class="text-2xl font-bold" data-en="Broadcasting" data-rw="Gukwirakwiza" data-fr="Diffusion">Broadcasting</h3>
+        <p class="mt-2" data-en="Host live webinars and podcasts to engage communities (FRW 2,000). Connect with thousands through interactive sessions in Kinyarwanda and English." data-rw="Kubika amahugurwa ya live n’ibiganiro kugirango utere inkunga abaturage (FRW 2,000). Huhuza n’abahumbi mu biganiro by’ubusabane mu Kinyarwanda no mu Cyongereza." data-fr="Organisez des webinaires et podcasts en direct pour engager les communautés (FRW 2,000). Connectez-vous avec des milliers via des sessions interactives en kinyarwanda et anglais.">Host live webinars and podcasts to engage communities (FRW 2,000). Connect with thousands through interactive sessions in Kinyarwanda and English.</p>
+        <button onclick="openModal('broadcasting')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+        <img src="job_listing.png" alt="Job Portal" class="module-image">
+        <i class="fas fa-briefcase text-4xl text-[#00ffcc] mb coma 4 animate-pulse"></i>
+        <h3 class="text-2xl font-bold" data-en="Job Portal" data-rw="Urubuga rw'Imirimo" data-fr="Portail d'Emploi">Job Portal</h3>
+        <p class="mt-2" data-en="Connect job seekers with employers (FRW 5,000 per job post). Features advanced matching and resume tools." data-rw="Guhuza abashaka akazi n'abakoresha (FRW 5,000 ku kazi kamwe). Ibirimo uburyo bwo guhuza n’ibikoresho bya CV." data-fr="Connectez les demandeurs d'emploi avec les employeurs (FRW 5,000 par offre). Inclut un appariement avancé et des outils de CV.">Connect job seekers with employers (FRW 5,000 per job post). Features advanced matching and resume tools.</p>
+        <button onclick="openModal('job-portal')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+        <img src="online_courses.png" alt="Training Portal" class="module-image">
+        <i class="fas fa-graduation-cap text-4xl text-[#00ffcc] mb-4 animate-pulse"></i>
+        <h3 class="text-2xl font-bold" data-en="Training Portal" data-rw="Urubuga rw'Amahugurwa" data-fr="Portail de Formation">Training Portal</h3>
+        <p class="mt-2" data-en="Online courses for skill development (FRW 10,000). Includes quizzes and certificates, accessible offline." data-rw="Amahugurwa yo ku murongo yo kwitabira ubumenyi (FRW 10,000). Arimo ibibazo n’ibitangwa, biraboneka nta interineti." data-fr="Cours en ligne pour le développement des compétences (FRW 10,000). Inclut des quiz et certificats, accessibles hors ligne.">Online courses for skill development (FRW 10,000). Includes quizzes and certificates, accessible offline.</p>
+        <button onclick="openModal('training-portal')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+        <img src="digital_product.png" alt="Digital Products" class="module-image">
+        <i class="fas fa-shopping-cart text-4xl text-[#00ffcc] mb-4 animate-pulse"></i>
+        <h3 class="text-2xl font-bold" data-en="Digital Products" data-rw="Ibicuruzwa bya Digitale" data-fr="Produits Numériques">Digital Products</h3>
+        <p class="mt-2" data-en="Sell e-books, software, and more (FRW 3,000). Instant downloads with secure payments." data-rw="Gucuruza ibitabo bya digitale, software, n’ibindi (FRW 3,000). Ikurura ryihuse n’ubwishyu bwizewe." data-fr="Vendez des livres électroniques, logiciels, et plus (FRW 3,000). Téléchargements instantanés avec paiements sécurisés.">Sell e-books, software, and more (FRW 3,000). Instant downloads with secure payments.</p>
+        <button onclick="openModal('digital-products')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+        <img src="freelancing.jpeg" alt="Online Services" class="module-image">
+        <i class="fas fa-tools text-4xl text-[#00ffcc] mb-4 animate-pulse"></i>
+        <h3 class="text-2xl font-bold" data-en="Online Services" data-rw="Serivise zo ku Murongo" data-fr="Services en Ligne">Online Services</h3>
+        <p class="mt-2" data-en="Freelance marketplace for design, consulting, etc. (FRW 20,000). Connect with professionals instantly." data-rw="Isoko ry’umwuga w’ubwisanzure rya design, ubujyanama, n’ibindi (FRW 20,000). Huhuza n’abahanga byihuse." data-fr="Marché de freelance pour le design, le conseil, etc. (FRW 20,000). Connectez-vous avec des professionnels instantanément.">Freelance marketplace for design, consulting, etc. (FRW 20,000). Connect with professionals instantly.</p>
+        <button onclick="openModal('online-services')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+      </div>
+     <div class="bg-white bg-opacity-10 p-6 rounded-lg text-center card-hover animate-float">
+    <img src="enterpreneur_collage.png" alt="Entrepreneur Chat" class="module-image">
+    <i class="fas fa-comments text-4xl text-[#00ffcc] mb-4 animate-pulse"></i>
+    <h3 class="text-2xl font-bold" data-en="Entrepreneur Chat" data-rw="Ikiganiro cy’Abacuruzi" data-fr="Chat des Entrepreneurs">Entrepreneur Chat</h3>
+    <p class="mt-2" data-en="Real-time chat support for startups (FRW 50,000). Connect with mentors and experts for business advice." data-rw="Ubufasha bwo kuganira mu gihe cya ngombwa ku tugirane (FRW 50,000). Vugana n’abajyanama n’abahanga ku bijyanye n’ubucuruzi." data-fr="Support par chat en temps réel pour les startups (FRW 50,000). Connectez-vous avec des mentors et experts pour des conseils commerciaux.">Real-time chat support for startups (FRW 50,000). Connect with mentors and experts for business advice.</p>
+    <button onclick="openModal('entrepreneur-chat')" class="mt-4 inline-block bg-[#00ffcc] text-[#030128] px-4 py-2 rounded-lg hover:shadow-[0_0_15px_#00ffcc] transition-all duration-300" data-en="Learn More" data-rw="Menya Ibindi" data-fr="En Savoir Plus">Learn More</button>
+</div>
+    </div>
+  </section>
+
+  <section id="impact" class="py-16 px-4 max-w-6xl mx-auto">
+    <h2 class="text-4xl font-['Orbitron'] text-center glow-text mb-12" data-en="Real-World Impact" data-rw="Ingaruka Nyayo" data-fr="Impact Réel">Real-World Impact</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <img src="Developer.jpg" alt="Tackling Unemployment" class="module-image">
+        <h3 class="text-2xl font-bold" data-en="Tackling Unemployment" data-rw="Gukemura Burangare" data-fr="Lutter contre le Chômage">Tackling Unemployment</h3>
+        <p class="mt-2" data-en="Jean, a Kigali graduate, lands a software developer job earning FRW 500,000 monthly through our Job Portal." data-rw="Jean, umuhanga wo mu Kigali, yabonye akazi ko gukora software akunguka FRW 500,000 buri kwezi ukoresheje Urubuga rw’Imirimo." data-fr="Jean, diplômé de Kigali, décroche un emploi de développeur logiciel gagnant FRW 500,000 par mois via notre Portail d'Emploi.">Jean, a Kigali graduate, lands a software developer job earning FRW 500,000 monthly through our Job Portal.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <img src="digital_entrepreneur.png" alt="Bridging Skill Gaps" class="module-image">
+        <h3 class="text-2xl font-bold" data-en="Bridging Skill Gaps" data-rw="Guhuza Ibura ry’Ubumenyi" data-fr="Combler les Lacunes de Compétences">Bridging Skill Gaps</h3>
+        <p class="mt-2" data-en="Aline, a rural entrepreneur, grows her business by 50% after taking a FRW 10,000 digital marketing course." data-rw="Aline, umucuruzi w’icyaro, yateje imbere ubucuruzi bwe ku 50% nyuma yo kwiga ikiciro cya FRW 10,000 cya marketing ya digitale." data-fr="Aline, entrepreneure rurale, augmente son entreprise de 50% après avoir suivi un cours de marketing numérique à FRW 10,000.">Aline, a rural entrepreneur, grows her business by 50% after taking a FRW 10,000 digital marketing course.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <img src="african_designer.png" alt="Expanding Market Access" class="module-image">
+        <h3 class="text-2xl font-bold" data-en="Expanding Market Access" data-rw="Kwagura Isoko" data-fr="Élargir l'Accès au Marché">Expanding Market Access</h3>
+        <p class="mt-2" data-en="Paul, an artist, sells digital designs for FRW 3,000 via MTN Mobile Money, reaching global buyers." data-rw="Paul, umuhanzi, acuruza ibishushanyo bya digitale ku FRW 3,000 akoresheje MTN Mobile Money, akagera ku bacuruzi b’isi yose." data-fr="Paul, artiste, vend des designs numériques pour FRW 3,000 via MTN Mobile Money, atteignant des acheteurs mondiaux.">Paul, an artist, sells digital designs for FRW 3,000 via MTN Mobile Money, reaching global buyers.</p>
+      </div>
+      <div class="bg-white bg-opacity-10 p-6 rounded-lg card-hover animate-float">
+        <img src="ussd.png" alt="Digital Inclusion" class="module-image">
+        <h3 class="text-2xl font-bold" data-en="Digital Inclusion" data-rw="Ubuwinjirizwa bwa Digitale" data-fr="Inclusion Numérique">Digital Inclusion</h3>
+        <p class="mt-2" data-en="Marie in a rural village accesses jobs and courses via USSD (*123#), even with unreliable internet." data-rw="Marie mu cyaro yinjira mu mirimo n’amahugurwa ukoresheje USSD (*123#), n’iyo interineti itari ihamye." data-fr="Marie, dans un village rural, accède aux emplois et cours via USSD (*123#), même avec une connexion internet instable.">Marie in a rural village accesses jobs and courses via USSD (*123#), even with unreliable internet.</p>
+      </div>
+    </div>
+  </section>
+
+ <section class="py-12 px-4 bg-[#030128]">
+  <h2 class="text-4xl font-['Orbitron'] text-center text-white glow-text mb-12" data-en="Get in Touch" data-rw="Twandikire" data-fr="Contactez-nous" id="contact">Get in Touch</h2>
+  <p class="text-center text-lg text-gray-300 mb-4" data-en="We’re here to assist you! Reach out via email, phone, or WhatsApp for inquiries, support, or feedback about our platform." data-rw="Turi hano ngo tugufashe! Twandikire ukoresheje imeyili, terefone, cyangwa WhatsApp ku bibazo, inkunga, cyangwa ibitekerezo ku rubuga rwacu." data-fr="Nous sommes là pour vous aider ! Contactez-nous par email, téléphone ou WhatsApp pour toute question, assistance ou commentaire sur notre plateforme.">We’re here to assist you! Reach out via email, phone, or WhatsApp for inquiries, support, or feedback about our platform.</p>
+  <p class="text-center text-md text-gray-400 mb-8" data-en="Our team responds within 24 hours during business days." data-rw="Itsinda ryacu risubiza mu masaha 24 mu minsi y’akazi." data-fr="Notre équipe répond dans les 24 heures les jours ouvrables.">Our team responds within 24 hours during business days.</p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+    <div class="bg-white bg-opacity-10 p-8 rounded-xl card-hover shadow-lg hover:shadow-[0_0_20px_rgba(0,255,204,0.3)] transition-all duration-300">
+      <form action="mailto:addrwanda@gmail.com" method="get" enctype="text/plain">
+        <input type="text" name="name" class="w-full p-3 mb-4 bg-[#030128] border border-[#00ffcc] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#00ffcc] placeholder-gray-400" placeholder="Name" data-en="Name" data-rw="Izina" data-fr="Nom" required>
+        <input type="email" name="email" class="w-full p-3 mb-4 bg-[#030128] border border-[#00ffcc] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#00ffcc] placeholder-gray-400" placeholder="Email" data-en="Email" data-rw="Imeri" data-fr="Email" required>
+        <textarea name="message" class="w-full p-3 mb-4 bg-[#030128] border border-[#00ffcc] rounded-md text-white focus:outline-none focus:ring-2 focus:ring-[#00ffcc] placeholder-gray-400 resize-none h-32" placeholder="Message" data-en="Message" data-rw="Ubutumwa" data-fr="Message" required></textarea>
+        <button type="submit" class="w-full bg-[#00ffcc] text-[#030128] px-6 py-3 rounded-lg font-bold hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300" data-en="Send Message" data-rw="Ohereza Ubutumwa" data-fr="Envoyer le Message">Send Message</button>
+      </form>
+    </div>
+    <div class="bg-white bg-opacity-10 p-8 rounded-xl card-hover shadow-lg hover:shadow-[0_0_20px_rgba(0,255,204,0.3)] transition-all duration-300">
+      <h3 class="text-xl font-bold text-white mb-4" data-en="Contact Us Directly" data-rw="Twandikire Direct" data-fr="Contactez-nous directement">Contact Us Directly</h3>
+      <div class="space-y-4">
+        <div class="flex items-center">
+          <i class="fas fa-envelope text-[#00ffcc] text-xl mr-3"></i>
+          <a href="mailto:addrwanda@gmail.com" class="text-gray-200 hover:text-[#00ffcc] transition-colors duration-300">addrwanda@gmail.com</a>
+        </div>
+        <div class="flex items-center">
+          <i class="fab fa-whatsapp text-[#00ffcc] text-xl mr-3"></i>
+          <a href="https://wa.me/+250788910639" class="text-gray-200 hover:text-[#00ffcc] transition-colors duration-300">+250 788 910 639 (WhatsApp)</a>
+        </div>
+        <div class="flex items-center">
+          <i class="fas fa-phone text-[#00ffcc] text-xl mr-3"></i>
+          <a href="tel:+250788910639" class="text-gray-200 hover:text-[#00ffcc] transition-colors duration-300">+250 788 910 639 (Call/Message)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-5xl mx-auto bg-white bg-opacity-10 p-8 rounded-xl card-hover shadow-lg hover:shadow-[0_0_20px_rgba(0,255,204,0.3)] transition-all duration-300">
+    <h3 class="text-xl font-bold text-white mb-4" data-en="Access Our Services" data-rw="Kugera ku Mbuga Zacu" data-fr="Accéder à nos services">Access Our Services</h3>
+    <div class="flex items-center">
+      <i class="fas fa-mobile-alt text-[#00ffcc] text-xl mr-3"></i>
+      <p class="text-lg text-gray-200" data-en="Rural users: Dial *123# to access jobs and courses via USSD on the upcoming platform." data-rw="Abakoresha b’icyaro: Bika *123# kugirango ubone imirimo n’amahugurwa ukoresheje USSD ku rubuga ruzaza." data-fr="Utilisateurs ruraux : Composez *123# pour accéder aux emplois et cours via USSD sur la plateforme à venir.">Rural users: Dial *123# to access jobs and courses via USSD on the upcoming platform.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Modals for each module -->
+  <div id="broadcasting" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('broadcasting')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="podcast.jpeg" alt="Broadcasting" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Broadcasting Module" data-rw="Ikiciro cyo Gukwirakwiza" data-fr="Module de Diffusion">Broadcasting Module</h3>
+      <p class="mt-4" data-en="Host live webinars and podcasts for community engagement at FRW 2,000. Features real-time Q&A, multi-platform streaming, and analytics to connect farmers, educators, and leaders with thousands." data-rw="Kubika amahugurwa ya live n’ibiganiro kugirango utere inkunga umuryango ku FRW 2,000. Ibirimo ibibazo n’ibisubizo by’igihe, gutangaza ku platform nyinshi, n’ubushakashatsi bw’ibipimo kugirango uhuzwe n’abahinzi, abigisha, n’abayobozi n’abahumbi." data-fr="Organisez des webinaires et podcasts en direct pour l'engagement communautaire à FRW 2,000. Inclut Q&R en temps réel, streaming multi-plateforme et analyses pour connecter agriculteurs, éducateurs et leaders avec des milliers de personnes.">Host live webinars and podcasts for community engagement at FRW 2,000. Features real-time Q&A, multi-platform streaming, and analytics to connect farmers, educators, and leaders with thousands.</p>
+    </div>
+  </div>
+  <div id="job-portal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('job-portal')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="job_listing.png" alt="Job Portal" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Job Portal Module" data-rw="Ikiciro cy’Urubuga rw’Imirimo" data-fr="Module du Portail d'Emploi">Job Portal Module</h3>
+      <p class="mt-4" data-en="Connect job seekers with employers for FRW 5,000 per post. Includes advanced job matching, resume builders, and interview scheduling to reduce unemployment across Rwanda." data-rw="Guhuza abashaka akazi n’abakoresha ku FRW 5,000 ku kazi. Birimo uburyo bwo guhuza akazi, kwandika CV, n’ibikoresho byo gutegura ibiganiro kugirango hakemuke burangare mu Rwanda." data-fr="Connectez les demandeurs d'emploi avec les employeurs pour FRW 5,000 par annonce. Inclut un appariement avancé, des générateurs de CV et une planification d'entretiens pour réduire le chômage au Rwanda.">Connect job seekers with employers for FRW 5,000 per post. Includes advanced job matching, resume builders, and interview scheduling to reduce unemployment across Rwanda.</p>
+    </div>
+  </div>
+  <div id="training-portal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('training-portal')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="online_courses.png" alt="Training Portal" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Training Portal Module" data-rw="Ikiciro cy’Urubuga rw’Amahugurwa" data-fr="Module du Portail de Formation">Training Portal Module</h3>
+      <p class="mt-4" data-en="Access online courses for skill development at FRW 10,000. Offers interactive lessons, quizzes, certifications, and offline access for rural users." data-rw="Kugera ku amahugurwa yo ku murongo yo kwitabira ubumenyi ku FRW 10,000. Atanga amasomo y’ubusabane, ibibazo, ibitangwa, n’uburyo bwo kuyakoresha nta interineti kubakoresha b’icyaro." data-fr="Accédez à des cours en ligne pour le développement des compétences à FRW 10,000. Offre des leçons interactives, des quiz, des certificats et un accès hors ligne pour les utilisateurs ruraux.">Access online courses for skill development at FRW 10,000. Offers interactive lessons, quizzes, certifications, and offline access for rural users.</p>
+    </div>
+  </div>
+  <div id="digital-products" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('digital-products')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="digital_product.png" alt="Digital Products" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Digital Products Module" data-rw="Ikiciro cy’Ibicuruzwa bya Digitale" data-fr="Module des Produits Numériques">Digital Products Module</h3>
+      <p class="mt-4" data-en="Sell and buy e-books, software, and templates for FRW 3,000. Features secure transactions, instant downloads, and global market reach." data-rw="Gucuruza no kugura ibitabo bya digitale, software, n’ibipimo ku FRW 3,000. Birimo ibicuruzwa byizewe, ikurura ryihuse, n’isoko mpuzamahanga." data-fr="Vendez et achetez des livres électroniques, logiciels et modèles pour FRW 3,000. Inclut des transactions sécurisées, des téléchargements instantanés et une portée mondiale.">Sell and buy e-books, software, and templates for FRW 3,000. Features secure transactions, instant downloads, and global market reach.</p>
+    </div>
+  </div>
+  <div id="online-services" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('online-services')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="freelancing.jpeg" alt="Online Services" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Online Services Module" data-rw="Ikiciro cy’Serivise zo ku Murongo" data-fr="Module des Services en Ligne">Online Services Module</h3>
+      <p class="mt-4" data-en="A freelance marketplace for design, consulting, and more at FRW 20,000 per project. Connects professionals with clients instantly." data-rw="Isoko ry’umwuga w’ubwisanzure rya design, ubujyanama, n’ibindi ku FRW 20,000 ku mushinga. Rihuza abahanga n’abakiliya byihuse." data-fr="Un marché de freelance pour le design, le conseil, et plus à FRW 20,000 par projet. Connecte les professionnels aux clients instantanément.">A freelance marketplace for design, consulting, and more at FRW 20,000 per project. Connects professionals with clients instantly.</p>
+    </div>
+  </div>
+  <div id="entrepreneur-chat" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-20 hidden">
+    <div class="bg-[#030128] p-8 rounded-lg max-w-lg w-11/12 animate-slideIn">
+      <span onclick="closeModal('entrepreneur-chat')" class="close-button text-2xl text-[#00ffcc] cursor-pointer absolute top-4 right-4">×</span>
+      <img src="enterpreneur_collage.png" alt="Entrepreneur Chat" class="module-image">
+      <h3 class="text-2xl font-bold" data-en="Entrepreneur Chat Module" data-rw="Ikiciro cy’Ikiganiro cy’Abacuruzi" data-fr="Module de Chat des Entrepreneurs">Entrepreneur Chat Module</h3>
+      <p class="mt-4" data-en="Connect with mentors and peers for real-time business advice at FRW 50,000. Includes group chats, expert sessions, and networking opportunities." data-rw="Vugana n’abajyanama n’abo mu rwego rwawe kugirango ubone inama z’ubucuruzi mu gihe kwa FRW 50,000. Zirimo amatsinda y’ikiganiro, ibiganiro by’ubuhanga, n’amahetero y’umurunga." data-fr="Connectez-vous avec des mentors et pairs pour des conseils commerciaux en temps réel à FRW 50,000. Inclut des chats de groupe, des sessions d’experts et des opportunités de réseautage.">Connect with mentors and peers for real-time business advice at FRW 50,000. Includes group chats, expert sessions, and networking opportunities.</p>
+    </div>
+</div>
+  </div>
+
+  <div class="fixed bottom-8 right-8 z-20">
+    <div class="ai-button bg-[#00ffcc] rounded-full w-16 h-16 flex items-center justify-center cursor-pointer hover:shadow-[0_0_20px_#00ffcc] transition-all duration-300 transform hover:scale-110">
+      <i class="fas fa-robot text-2xl text-[#030128]"></i>
+    </div>
+    <div class="ai-chat hidden bg-black bg-opacity-90 p-4 rounded-lg w-80 absolute bottom-20 right-0">
+      <div id="chat-messages" class="max-h-60 overflow-y-auto mb-4"></div>
+      <input id="ai-input" type="text" class="w-full p-2 bg-transparent border-b border-[#00ffcc] focus:outline-none" placeholder="Ask about African Deals Domain!" data-en="Ask about African Deals Domain!" data-rw="Baza ku African Deals Domain!" data-fr="Posez des questions sur le African Deals Domain !">
+      <div class="typing-indicator flex gap-2 mt-4 hidden">
+        <span class="w-2 h-2 bg-[#00ffcc] rounded-full animate-bounce"></span>
+        <span class="w-2 h-2 bg-[#00ffcc] rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+        <span class="w-2 h-2 bg-[#00ffcc] rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+      </div>
+    </div>
+  </div>
+<footer class="bg-[#030128] text-center py-8">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-gray-300 mb-4" data-en="Follow us for updates, opportunities, and community engagement!" data-rw="Dukurikire kugirango ubone amakuru, amahirwe, n’umuryango w’umuryango!" data-fr="Suivez-nous pour des mises à jour, des opportunités et un engagement communautaire !">Follow us for updates, opportunities, and community engagement!</p>
+    <div class="flex justify-center space-x-6 mb-6">
+      <a href="https://www.facebook.com/profile.php?id=100063824799685" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="Facebook" data-en="Facebook" data-rw="Facebook" data-fr="Facebook"><i class="fab fa-facebook-f text-2xl"></i></a>
+      <a href="https://x.com/@DomainAfrican" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="X (Twitter)" data-en="Twitter" data-rw="Twitter" data-fr="Twitter"><i class="fab fa-x-twitter text-2xl"></i></a>
+      <a href="https://rw.linkedin.com/in/african-deals-domain-8866641b9" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="LinkedIn" data-en="LinkedIn" data-rw="LinkedIn" data-fr="LinkedIn"><i class="fab fa-linkedin-in text-2xl"></i></a>
+      <a href="https://youtube.com/@addrwandatv" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="YouTube" data-en="YouTube" data-rw="YouTube" data-fr="YouTube"><i class="fab fa-youtube text-2xl"></i></a>
+      <a href="https://tiktok.com/@addrwandatv" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="TikTok" data-en="TikTok" data-rw="TikTok" data-fr="TikTok"><i class="fab fa-tiktok text-2xl"></i></a>
+      <a href="https://t.me/addrwanda" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="Telegram" data-en="Telegram" data-rw="Telegram" data-fr="Telegram"><i class="fab fa-telegram text-2xl"></i></a>
+      <a href="https://ni-he.com/addrwanda" class="text-[#00ffcc] hover:text-white hover:scale-110 transition-all duration-300" aria-label="Ni-He" data-en="Ni-He" data-rw="Ni-He" data-fr="Ni-He"><i class="fas fa-globe text-2xl"></i></a>
+    </div>
+    <p class="text-gray-400" data-en="© 2025 African Deals Domain. All rights reserved." data-rw="© 2025 African Deals Domain. Ubushobozi bwose burabitswe." data-fr="© 2025 African Deals Domain. Tous droits réservés.">© 2025 African Deals Domain. All rights reserved.</p>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script>
+  // Three.js globe for home section
+  const canvas = document.getElementById('canvas-background');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const geometry = new THREE.SphereGeometry(5, 32, 32);
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ffcc, wireframe: true });
+  const sphere = new THREE.Mesh(geometry, material);
+  scene.add(sphere);
+
+  camera.position.z = 10;
+
+  function animateGlobe() {
+    sphere.rotation.x += 0.01;
+    sphere.rotation.y += 0.01;
+    renderer.render(scene, camera);
+    requestAnimationFrame(animateGlobe);
+  }
+
+  function toggleGlobe() {
+    const homeSection = document.getElementById('home');
+    const rect = homeSection.getBoundingClientRect();
+    if (rect.top >= -rect.height && rect.bottom <= window.innerHeight + rect.height) {
+      canvas.classList.remove('hidden');
+      animateGlobe();
+    } else {
+      canvas.classList.add('hidden');
+    }
+  }
+
+  window.addEventListener('scroll', toggleGlobe);
+  toggleGlobe();
+
+  // Modal functionality
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.remove('hidden');
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.add('hidden');
+  }
+
+  // AI Assistant responses
+  const aiResponses = {
+    en: {
+      greeting: "Hello! Welcome to African Deals Domain, I am ADD AI.What can I help you/Ask me about our vision, modules, user roles, or how we empower Rwandans!",
+      keywords: {
+        "what is african deals domain|about|overview|platform|what is it": "overview",
+        "vision|goal|purpose|aim": "vision",
+        "mission|objective|goals": "mission",
+        "modules|features|components|services|what does it offer": "modules.overview",
+        "broadcasting|webinar|podcast|live stream|live event": "modules.broadcasting",
+        "job portal|jobs|employment|work|find job|job search|career|opportunities": "modules.job_portal",
+        "training portal|courses|learning|education|skills|training|learn": "modules.training_portal",
+        "digital products|e-books|software|designs|digital goods": "modules.digital_products",
+        "online services|freelance|consulting|logo|freelancing": "modules.online_services",
+        "entrepreneur training|startup|business training|entrepreneurship": "modules.entrepreneur_training",
+        "user roles|users|account types|roles|who can use": "user_roles.overview",
+        "buyer|learner|customer|trainee|student": "user_roles.buyer_learner",
+        "seller|service provider|vendor|freelancer": "user_roles.seller_service_provider",
+        "job seeker|freelancer|applicant|unemployed": "user_roles.job_seeker",
+        "employer|company|hiring|recruiter": "user_roles.employer",
+        "instructor|creator|trainer|content creator|teacher": "user_roles.instructor",
+        "entrepreneur trainee|startup trainee|business learner|aspiring entrepreneur": "user_roles.entrepreneur_trainee",
+        "admin|administrator|management|platform manager": "user_roles.admin",
+        "unemployment|jobless|no work|no job": "problems_solved.unemployment",
+        "skill gaps|no skills|training needs|lack of skills": "problems_solved.skill_gaps",
+        "market access|sell products|reach customers|marketplace": "problems_solved.market_access",
+        "connectivity|internet|offline|rural access|ussd|no internet": "problems_solved.connectivity_barriers",
+        "rwanda|frw|mobile money|kinyarwanda|local|rwanda-first": "rwanda_first",
+        "payment|mtn|bank transfer|crypto|paypal|credit card": "payment_methods",
+        "cost|price|fees|how much|pricing": "monetization",
+        "roadmap|next steps|launch|plan|future|timeline": "roadmap",
+        "community|events|forums|engagement|webinaires": "community",
+        "how it works|sign up|use platform|process|how to use": "how_it_works",
+        "rural|village|low internet|accessibility|remote": "accessibility",
+        "join|waitlist|sign up|register|join platform": "join_waitlist",
+        "success|why it works|benefits|impact|why join": "why_it_succeeds",
+        "technical|technology|cloud|open source|tech stack": "technical_details",
+        "example|case study|story|jean|aline|paul|marie|success story": "example_stories",
+        "faq|common questions|help|questions": "faq"
+      },
+      overview: "African Deals Domain is a transformative e-commerce and empowerment platform that will launch all its features in Rwanda  in few upcoming days. It connects communities through digital commerce, job opportunities, and education, using FRW currency, MTN Mobile Money, and bank transfers. With six modules—Broadcasting, Job Portal, Training Portal, Digital Products, Online Services, and Entrepreneur Chat—it tackles unemployment, skill gaps, and limited market access, fostering economic growth and digital inclusion. Want to explore our modules or user roles?",
+      vision: "Our vision is to empower every Rwandan with opportunities to learn, earn, Born to run a Business, and grow through a digital platform tailored to Rwanda’s unique needs, driving economic and social progress.",
+      mission: "We aim to connect Rwandan communities through digital commerce, job opportunities, and education, fostering economic growth and digital inclusion in both urban and rural areas.",
+      modules: {
+        overview: "African Deals Domain features six interconnected modules: Broadcasting for live webinars (FRW 2,000), Job Portal for employment (FRW 5,000), Training Portal for skill development (FRW 10,000), Digital Products for e-books and more (FRW 3,000), Online Services for freelance work (FRW 20,000), and Entrepreneur Chat for startups (FRW 50,000). Which module interests you?",
+        broadcasting: "The Broadcasting module lets users host live webinars or podcasts, like a farmer sharing organic farming tips for FRW 2,000, paid via MTN Mobile Money. It fosters community engagement and knowledge sharing. Want to know how creators set up broadcasts?",
+        job_portal: "The Job Portal connects job seekers like Jean to employers, helping them secure roles like software developer for FRW 500,000/month. Companies post jobs for FRW 5,000, receiving applications instantly. Interested in how job seekers apply?",
+        training_portal: "The Training Portal offers online courses, like digital marketing for FRW 10,000, with offline access for rural users. Aline, a rural entrepreneur, used it to grow her business by 50%. Curious about available courses?",
+        digital_products: "The Digital Products module enables creators like Paul to sell e-books or designs for FRW 3,000, paid via MTN Mobile Money, expanding market access for Rwandan creators. Want to learn how sellers list products?",
+        online_services: "The Online Services module is a freelance marketplace where designers or consultants offer services like logo creation for FRW 20,000, paid via bank transfer or MTN. Interested in becoming a service provider?",
+        entrepreneur_training: "The Entrepreneur Chat offers 12-week programs for FRW 50,000, helping aspiring entrepreneurs pitch to investors and build startups. Want to know more about the training curriculum?"
+      },
+      user_roles: {
+        overview: "Our platform supports seven user roles: Buyer/Learner, Seller/Service Provider, Job Seeker, Employer, Instructor/Creator, Entrepreneur Trainee, and Admin, each with tailored features to empower Rwandans. Which role are you curious about?",
+        buyer_learner: "Buyers or Learners purchase digital products like e-books for FRW 3,000 or courses like coding for FRW 10,000, tracking progress in a dashboard. Want to know how to access courses offline?",
+        seller_service_provider: "Sellers or Service Providers list digital goods or freelance services, like logos for FRW 20,000, and manage sales in FRW via a dashboard. Curious about setting up a seller account?",
+        job_seeker: "Job Seekers build resumes in Kinyarwanda or English and apply for jobs, like Jean who found a FRW 500,000/month role via the Job Portal. Interested in the application process?",
+        employer: "Employers post jobs for FRW 5,000, review candidates, and hire talent, like software developers in Kigali. Want to know how employers post jobs?",
+        instructor: "Instructors or Creators host courses or webinars, like a farmer leading a FRW 2,000 broadcast on organic farming, and track earnings in a dashboard. Curious about creating content?",
+        entrepreneur_trainee: "Entrepreneur Trainees join 12-week programs for FRW 50,000, gaining skills and mentorship to pitch startups to investors. Want to explore the training program?",
+        admin: "Admins manage the platform, resolve disputes, and ensure smooth operations for all users. Interested in how admins maintain fairness?"
+      },
+      problems_solved: {
+        unemployment: "We tackle unemployment by connecting job seekers like Jean to employers via the Job Portal, helping them secure roles like software developer for FRW 500,000/month. Want to learn how the Job Portal works?",
+        skill_gaps: "We address skill gaps with the Training Portal, where users like Aline learn digital marketing for FRW 10,000, boosting their business by 50%. Curious about available courses?",
+        market_access: "We expand market access for creators like Paul, who sell digital designs for FRW 3,000 on the Digital Products module, paid via MTN Mobile Money. Interested in selling products?",
+        connectivity_barriers: "We overcome connectivity barriers with USSD (e.g., *123*1# to browse jobs) and offline modes, enabling rural users like Marie to join the digital economy. Want to know more about USSD access?"
+      },
+      rwanda_first: "African Deals Domain is tailored for Rwanda with transactions in FRW, payments via MTN Mobile Money or bank transfers, Kinyarwanda support, and USSD (*123#) for rural users with limited internet. Curious about our local focus?",
+      payment_methods: "Users can pay with MTN Mobile Money or bank transfers in FRW for accessibility. Plans to integrate crypto, PayPal, and credit cards are in development for future scalability. Want to know about payment security?",
+      monetization: "We generate revenue through 10-20% commissions on sales, premium subscriptions for FRW 5,000/month, listing fees for jobs or products (FRW 2,000), courses (FRW 5,000-50,000), and pay-per-view broadcasts (FRW 1,000-10,000). Interested in our business model?",
+      roadmap: "Our roadmap includes developing an MVP for the Job and Training Portals, designing a mobile-friendly UI with Kinyarwanda support, building with open-source tools, testing in Kigali and rural areas, and launching in Rwanda with plans to scale to East Africa. Want to know about our launch timeline?",
+      community: "We foster community through live webinars, forums, and events, like a farmer’s FRW 2,000 organic farming broadcast, building engagement across Rwanda. Curious about upcoming events?",
+      how_it_works: "Users sign up, choose a role (e.g., Job Seeker, Seller), and access modules via a mobile-friendly interface. Payments use MTN Mobile Money or bank transfers in FRW, and rural users access features via USSD (*123#). Dashboards track progress, sales, or applications. Want to explore a specific role?",
+      accessibility: "Our platform ensures accessibility with USSD (e.g., *123*1# for job listings) and offline modes for rural users like Marie with unreliable internet, plus Kinyarwanda support for inclusivity. Interested in how rural users benefit?",
+      why_it_succeeds: "African Deals Domain will succeed due to its Rwanda-first focus (FRW, MTN Mobile Money, Kinyarwanda), inclusivity with USSD and offline access, cloud-based scalability, and community engagement through events. Want to join our journey?",
+      technical_details: "The platform is built with open-source tools for cost efficiency and cloud-based infrastructure for scalability. It supports mobile-friendly UI, offline access, and USSD for rural connectivity. Curious about our tech stack?",
+      example_stories: "Our platform transforms lives: Jean found a FRW 500,000/month job via the Job Portal, Aline grew her business by 50% with a FRW 10,000 course, Paul sold designs for FRW 3,000, and Marie accessed jobs via USSD in a rural area. Want to hear more about a specific story?",
+      faq: {
+        what_is_cost: "Costs vary by module: job postings cost FRW 5,000, courses range from FRW 5,000-50,000, digital products start at FRW 3,000, and broadcasts are FRW 1,000-10,000. Premium subscriptions are FRW 5,000/month. Want details on a specific module?",
+        how_to_join: "Sign up for our waitlist with your email and preferred role (e.g., Job Seeker, Seller) to be notified at launch. Rural users can register via USSD (*123#). Interested in joining now?",
+        who_can_use: "Anyone in Rwanda can use the platform, from job seekers and entrepreneurs to employers and creators, with roles tailored for urban and rural users. Curious about a specific role?",
+        is_it_free: "Basic access is free, but premium features like subscriptions (FRW 5,000/month) or listing fees (FRW 2,000) apply. Courses and broadcasts have specific costs. Want to know about free features?"
+      },
+      join_waitlist: "Join our waitlist to be the first to experience African Deals Domain! Sign up with your email and preferred role (e.g., Job Seeker, Entrepreneur) to stay updated on our June 2025 launch. Ready to join?",
+      default: "I’m here to answer any question about African Deals Domain! Could you specify what you’d like to know about our platform, modules, user roles, or impact in Rwanda?"
+    },
+    rw: {
+      greeting: "Mwaramutse! Murakaza neza ku Urubuga rw'African Deals Domain. Mbaza ku byerekeye icyerekezo cyacu, ibice, imyanya, cyangwa uko dushoboza Abanyarwanda!",
+      keywords: {
+        "African Deals Domain|ni iki|ku rubuga|urubuga": "overview",
+        "icyerekezo|inzozi|intego|amahitamo": "vision",
+        "umurimo|inshingano|intego|ibyo dushaka": "mission",
+        "ibice|ibintu|serivise|ibyo rutanga": "modules.overview",
+        "gukwirakwiza|webinar|podcast|live stream|ibikorwa by’ihuriro": "modules.broadcasting",
+        "urubuga rw’imirimo|imirimo|akazi|kazi|kubona akazi|ishakiro ry’akazi": "modules.job_portal",
+        "urubuga rw’amahugurwa|amasomo|uburezi|ubuhanga|kwiga": "modules.training_portal",
+        "ibicuruzwa bya digitale|ibitabo bya digitale|software|ibishushanyo|ibintu bya digitale": "modules.digital_products",
+        "serivise zo ku murongo|ikodesha|ubujyanama|logo|umwuga w’ikodesha": "modules.online_services",
+        "amahugurwa y’abacuruzi|startup|ubucuruzi|abacuruzi": "modules.entrepreneur_training",
+        "imyanya|abakoresha|uburyo bw’akonti|imyanya y’abakoresha": "user_roles.overview",
+        "umuguzi|umwigwa|umukiriya|umunyeshuri": "user_roles.buyer_learner",
+        "umugurisha|mutanga-serivise|umucuruzi|ikodesha": "user_roles.seller_service_provider",
+        "ushaka akazi|ikodesha|usaba akazi|utagira akazi": "user_roles.job_seeker",
+        "umukoresha|ikosora|company|abakoresha": "user_roles.employer",
+        "umwigisha|umucuruzi|umuhanga|content creator|umwalimu": "user_roles.instructor",
+        "umucuruzi w’ikizamini|startup trainee|umwigwa w’ubucuruzi|umucuruzi mushya": "user_roles.entrepreneur_trainee",
+        "umuyobozi|administrator|ubuyobozi|umuyobozi w’urubuga": "user_roles.admin",
+        "ubushomeri|nta kazi|akazi nta na hamwe|utagira akazi": "problems_solved.unemployment",
+        "ubumenyi buke|nta buhanga|amahugurwa|ubuhanga buke": "problems_solved.skill_gaps",
+        "isoko|kugurisha|abakiriya|ahagurishwa": "problems_solved.market_access",
+        "ihuriro|interineti|offline|icyaro|ussd|nta interineti": "problems_solved.connectivity_barriers",
+        "rwanda|frw|mobile money|kinyarwanda|rwanda-first|ahantu hafi": "rwanda_first",
+        "kwishyura|mtn|banki|crypto|paypal|amakarita": "payment_methods",
+        "igiciro|amafaranga|cost|how much|igiciro cya": "monetization",
+        "ipango|amahitamo|gutangiza|plan|ejo hazaza|igihe": "roadmap",
+        "umuryango|ibikorwa|forum|ihuriro|amahuriro": "community",
+        "ukuntu bikora|iyandikishe|koresha|inzira|ukuntu urubuga rukora": "how_it_works",
+        "icyaro|umudugudu|interineti nkeya|ubushobozi|ahantu h’icyaro": "accessibility",
+        "injira|lisite|iyandikishe|join|kwinjira": "join_waitlist",
+        "intsinzi|kuki bikora|injyenda|ingaruka|kuki tujyane": "why_it_succeeds",
+        "tekinike|teknoloji|cloud|open source|tekinike y’urubuga": "technical_details",
+        "urugero|ikibazo|urwenya|jean|aline|paul|marie|inkuru y’intsinzi": "example_stories",
+        "faq|ibibazo|inyunganizi|ibibazo bisanzwe": "faq"
+      },
+      overview: "African Deals Domain ni urubuga rwashyiraho ibintu bishya mu bucuruzi bwa digitale n’ubushobozi mu Rwanda, ruzatangira ku ya 9 Kamena 2025. Ruhuza amakoperative mu bucuruzi bwa digitale, ubushobozi bw’akazi, n’uburezi, rikoresheje FRW, MTN Mobile Money, n’ibanki. Rufite ibice bitandatu: Gukwirakwiza, Urubuga rw’Imirimo, Urubuga rw’Amahugurwa, Ibicuruzwa bya Digitale, Serivise zo ku Murongo, n’Ikigo cy’Amahugurwa y’Abacuruzi, birwanya ubushomeri, ubumenyi buke, n’isoko rito, byongera iterambere ry’ubukungu n’ubwinjirizwa bwa digitale. Urashaka kumenya byinshi ku bice cyangwa imyanya?",
+      vision: "Icyerekezo cyacu ni ugushoboza buri Munyarwanda n’ubushobozi bwo kwiga, kwunguka, no gukura hakoreshejwe urubuga rwa digitale rwahariye ibyifuzo by’u Rwanda, rigatuma habaho iterambere ry’ubukungu n’umuryango.",
+      mission: "Tuzamira guhuza amakoperative y’Abanyarwanda mu bucuruzi bwa digitale, ubushobozi bw’akazi, n’uburezi, bigatuma habaho iterambere ry’ubukungu n’ubwinjirizwa bwa digitale mu mijyi n’icyaro.",
+      modules: {
+        overview: "Urubuga rwacu rufite ibice bitandatu by’ingenzi: Gukwirakwiza (FRW 2,000), Urubuga rw’Imirimo (FRW 5,000), Urubuga rw’Amahugurwa (FRW 10,000), Ibicuruzwa bya Digitale (FRW 3,000), Serivise zo ku Murongo (FRW 20,000), n’Ikigo cy’Amahugurwa y’Abacuruzi (FRW 50,000). Igice cyawe cy’ipende ni iki?",
+        broadcasting: "Igice cyo Gukwirakwiza kiruhuza abantu gukora amahuriro ya webcam cyangwa podcast, nka mugabo w’ubuhinzi usangira inama ku buhinzi bwa biyoloji kwa FRW 2,000, bakishyura na MTN Mobile Money. Urashaka kumenya uko abacuruzi bashyiraho amahuriro?",
+        job_portal: "Urubuga rw’Imirimo ruhuza abashaka akazi nka Jean n’abakoresha, kubafasha kubona imirimo nka software developer kwa FRW 500,000 buri kwezi. Amakampuni atanga imirimo kwa FRW 5,000, akira ibyifuzo byihuse. Urashaka kumenya inzira yo gusaba akazi?",
+        training_portal: "Urubuga rw’Amahugurwa rutanga amasomo yo ku murongo, nka marketing ya digitale kwa FRW 10,000, hamwe n’uburyo bwo kuyakoresha hatari ho kuri murongo. Aline, umucuruzi w’icyaro, yagabanyije ubucuruzi bwe na 50%. Urashaka kumenya amasomo ariho?",
+        digital_products: "Igice cy’Ibicuruzwa bya Digitale kiruhuza abacuruzi nka Paul kugurisha ibitabo bya digitale cyangwa ibishushanyo kwa FRW 3,000, bakishyura na MTN Mobile Money, byongera isoko ryabo. Urashaka kumenya uko abagurisha batangaza ibicuruzwa?",
+        online_services: "Igice cyo Serivise zo ku Murongo ni isoko ry’umwuga w’ikodesha aho abashushanya cyangwa abagisha inama batanga serivise nka logo kwa FRW 20,000, bakishyura na banki cyangwa MTN. Urashaka kuba umutanga-serivise?",
+        entrepreneur_training: "Ikigo cy’Amahugurwa y’Abacuruzi gitanga gahunda y’ibyumweru 12 kwa FRW 50,000, gifasha abacuruzi bashya gusaba abashoramari no gukura ubucuruzi. Urashaka kumenya iby’ibyo bigo?"
+      },
+      user_roles: {
+        overview: "Urubuga rwacu rushyigikira imyanya y’abakoresha barindwi: Umuguzi/Umwigwa, Umugurisha/Mutanga-serivise, Ushaka Akazi, Umukoresha, Umwigisha/Umucuruzi, Umucuruzi w’Ikizamini, n’Umuyobozi, buri wese afite ibintu byihariye. Umwanya umutima wawe ni uwuhe?",
+        buyer_learner: "Abaguzi cyangwa Abigwa bagura ibicuruzwa bya digitale nka bitabo bya digitale kwa FRW 3,000 cyangwa amasomo nka kode kwa FRW 10,000, bakurikirana ibyagezweho kuri dashiboro. Urashaka kumenya uko bakoresha amasomo hatari ho kuri murongo?",
+        seller_service_provider: "Abagurisha cyangwa Abatanga-serivise batanga ibicuruzwa bya digitale cyangwa serivise z’ikodesha, nka logo kwa FRW 20,000, bakurikirana ibyagurishijwe muri FRW kuri dashiboro. Urashaka kumenya uko bashyiraho akonti y’umugurisha?",
+        job_seeker: "Abashaka Akazi bashyira CV zabo mu Kinyarwanda cyangwa Icyongereza bakasaba imirimo, nka Jean wabonye akazi ka FRW 500,000 buri kwezi binyuze kuri Urubuga rw’Imirimo. Urashaka kumenya inzira yo gusaba?",
+        employer: "Abakoresha bashyira imirimo kwa FRW 5,000, basuzuma abasabye akazi, bakabona abakangara nka bakora software muri Kigali. Urashaka kumenya uko abakoresha batangaza imirimo?",
+        instructor: "Abigisha cyangwa Abacuruzi batanga amasomo cyangwa amahuriro ya webcam, nka mugabo w’ubuhinzi utanga amahuriro kwa FRW 2,000 ku buhinzi bwa biyoloji, bakurikirana inyungu kuri dashiboro. Urashaka kumenya uko bashyiraho ibicuruzwa?",
+        entrepreneur_trainee: "Abacuruzi b’Ikizamini binjira muri gahunda y’ibyumweru 12 kwa FRW 50,000, bagira ubumenyi n’ubujyanama bwo gusaba abashoramari. Urashaka kumenya iby’iyo gahunda?",
+        admin: "Abayobozi bashyira mu gaciro urubuga, basubiza amakimbirane, kandi bashingira ibikorwa by’umwuga by’abakoresha bose. Urashaka kumenya uko bayobora neza?"
+      },
+      problems_solved: {
+        unemployment: "Turwanya ubushomeri mu guhuza abashaka akazi nka Jean n’abakoresha binyuze kuri Urubuga rw’Imirimo, kubafasha kubona imirimo nka software developer kwa FRW 500,000 buri kwezi. Urashaka kumenya uko Urubuga rw’Imirimo rukora?",
+        skill_gaps: "Turandura umwanya w’ubumenyi hamwe n’Urubuga rw’Amahugurwa, aho abakoresha nka Aline biga marketing ya digitale kwa FRW 10,000, byongera ubucuruzi bwabo na 50%. Urashaka kumenya amasomo ariho?",
+        market_access: "Twagura isoko ry’abacuruzi nka Paul, bagurisha ibishushanyo bya digitale kwa FRW 3,000 kuri Igice cy’Ibicuruzwa bya Digitale, bakishyura na MTN Mobile Money. Urashaka kugurisha ibicuruzwa?",
+        connectivity_barriers: "Turandura ibibazo by’ihuriro na USSD (urugero, *123*1# kuri imirimo) n’uburyo bwo kuri offline, bigatuma abakoresha b’icyaro nka Marie binjira mu bukungu bwa digitale. Urashaka kumenya byinshi ku USSD?"
+      },
+      rwanda_first: "African Deals Domain rwashyiriweho u Rwanda hamwe n’ibicuruzwa muri FRW, kwishyura na MTN Mobile Money cyangwa banki, gushyigikira Ikinyarwanda, n’USSD (*123#) kubakoresha b’icyaro bafite interineti nkeya. Urashaka kumenya iby’uburyo bwacu bwa hafi?",
+      payment_methods: "Abakoresha bashobora kwishyura na MTN Mobile Money cyangwa banki muri FRW kugirango byorohere. Ipango ryo kwinjiza crypto, PayPal, n’amakarita y’ishyurwa riri mu gutegurwa kugirango ryagure. Urashaka kumenya iby’umutekano w’ishyurwa?",
+      monetization: "Twunguka inyungu binyuze kuri komisiyo ya 10-20% ku bicuruzwa, abiyandikisha ba premium kwa FRW 5,000 buri kwezi, amafaranga yo gutangaza imirimo cyangwa ibicuruzwa (FRW 2,000), amasomo (FRW 5,000-50,000), n’amahuriro ya pay-per-view (FRW 1,000-10,000). Urashaka kumenya iby’uburyo bwacu bw’ubucuruzi?",
+      roadmap: "Ipango ryacu ririmo gushyiraho MVP y’Urubuga rw’Imirimo n’Amahugurwa, gushushanya UI ifasha imifukuro hamwe na Kinyarwanda, gukora na zana za open-source, kugerageza muri Kigali n’icyaro, no gutangiza mu Rwanda hamwe n’ipango ryo kwagura mu Burasirazuba bw’Afrika. Urashaka kumenya iby’igihe cyo gutangiza?",
+      community: "Tuzamura umuryango binyuze kuri amahuriro ya webcam, forum, n’ibikorwa, nka amahuriro y’ubuhinzi bwa biyoloji kwa FRW 2,000, bigatuma habaho ihuriro mu Rwanda. Urashaka kumenya iby’ibikorwa bizaza?",
+      how_it_works: "Abakoresha biyandikisha, bahitamo umwanya (urugero, Ushaka Akazi, Umugurisha), bakoresha ibice binyuze kuri interface ifasha imifukuro. Kwishyura bikoreshwa na MTN Mobile Money cyangwa banki muri FRW, kandi abakoresha b’icyaro bakoresha ibintu binyuze kuri USSD (*123#). Dashiboro ikurikirana ibyagezweho, ibyagurishijwe, cyangwa ibyifuzo. Urashaka kumenya iby’umwanya runaka?",
+      accessibility: "Urubuga rwacu rushyigikira ubushobozi na USSD (urugero, *123*1# kuri lisite y’imirimo) n’uburyo bwo kuri offline kubakoresha b’icyaro nka Marie bafite interineti nkeya, hamwe na Kinyarwanda kugirango byose biboneke. Urashaka kumenya uko abakoresha b’icyaro banyuzwaho?",
+      why_it_succeeds: "African Deals Domain ruzatsinda kubera uburyo bwa hafi mu Rwanda (FRW, MTN Mobile Money, Kinyarwanda), ubwinjirizwa na USSD n’uburyo bwo offline, ubushobozi bwo kwagura bushingiye kuri cloud, n’ihuriro ry’umuryango binyuze mu bikorwa. Urashaka kuba mu rugendo rwacu?",
+      technical_details: "Urubuga rwashyiriweho na zana za open-source kugirango rigabanye ikiguzi kandi rifite infrastructure ya cloud kugirango ryagure. Rishyigikira UI ifasha imifukuro, uburyo bwo offline, n’USSD kubwinjirizwa mu cyaro. Urashaka kumenya iby’tekinike yacu?",
+      example_stories: "Urubuga rwacu rwahindura ubuzima: Jean yabonye akazi ka FRW 500,000 buri kwezi binyuze kuri Urubuga rw’Imirimo, Aline yongereye ubucuruzi bwe na 50% na amasomo ya FRW 10,000, Paul yagurishije ibishushanyo kwa FRW 3,000, kandi Marie yabonye imirimo na USSD mu cyaro. Urashaka gusoma byinshi ku rwenya rw’umuntu runaka?",
+      faq: {
+        what_is_cost: "Igiciro kiratandukana n’igice: gutangaza imirimo birashya FRW 5,000, amasomo aratandukana kuri FRW 5,000-50,000, ibicuruzwa bya digitale bitangira kuri FRW 3,000, n’amahuriro aratandukana kuri FRW 1,000-10,000. Abiyandikisha ba premium ni FRW 5,000 buri kwezi. Urashaka iby’igice runaka?",
+        how_to_join: "Iyandikishe kuri lisite yacu n’email yawe n’umwanya w’ipende (urugero, Ushaka Akazi, Umugurisha) kugirango umenyeshe igihe cyo gutangiza. Abakoresha b’icyaro bashobora kwiyandikisha na USSD (*123#). Urashaka kwinjira nonaha?",
+        who_can_use: "Umuntu wese mu Rwanda ashobora gukoresha urubuga, abashaka akazi, abacuruzi, abakoresha, n’abacuruzi, hamwe n’imyanya yahariwe abakoresha bo mu mijyi n’icyaro. Urashaka kumenya iby’umwanya runaka?",
+        is_it_free: "Ubushobozi bwa mbere ni bwa bure, ariko ibintu by’ipende nka abiyandikisha (FRW 5,000 buri kwezi) cyangwa amafaranga yo gutangaza (FRW 2,000) bikoreshwa. Amasomo n’amahuriro afite igiciro cyihariye. Urashaka kumenya ibintu bya bure?"
+      },
+      join_waitlist: "Injira kuri lisite yacu kugirango ube umwe wa mbere kumenya African Deals Domain! Iyandikishe na email yawe n’umwanya w’ipende (urugero, Ushaka Akazi, Umucuruzi) kugirango ugume uhabwa amakuru ku itangizwa ryacu muri Kamena 2025. Witeguye kwinjira?",
+      default: "Ndi hano ngo nsubize ibibazo byose ku Urubuga rw'African Deals Domain! Washobora kumenyesha icyo ushaka kumenya ku rubuga rwacu, ibice, imyanya, cyangwa ingaruka mu Rwanda?"
+    },
+    fr: {
+      greeting: "Bonjour ! Bienvenue sur African Deals Domain, je suis ADD AI. En quoi puis-je vous aider ? Demandez-moi notre vision, nos modules, les rôles des utilisateurs ou comment nous autonomisons les Rwandais !",
+      keywords: {
+        "African Deals Domain|qu’est-ce que|à propos|plateforme|qu’est-ce": "overview",
+        "vision|but|objectif|vision du projet": "vision",
+        "mission|objectif|but principal|buts": "mission",
+        "modules|fonctionnalités|composants|services|offres": "modules.overview",
+        "diffusion|webinaire|podcast|stream en direct|événement en direct": "modules.broadcasting",
+        "portail d’emploi|emplois|travail|trouver emploi|recherche emploi|carrière|opportunités": "modules.job_portal",
+        "portail de formation|cours|éducation|compétences|formation|apprendre": "modules.training_portal",
+        "produits numériques|e-books|logiciels|designs|biens numériques": "modules.digital_products",
+        "services en ligne|freelance|consulting|logo|travail indépendant": "modules.online_services",
+        "formation des entrepreneurs|startup|formation commerciale|entrepreneuriat": "modules.entrepreneur_training",
+        "rôles|utilisateurs|types de compte|rôles d’utilisateur": "user_roles.overview",
+        "acheteur|apprenant|client|stagiaire|étudiant": "user_roles.buyer_learner",
+        "vendeur|fournisseur de services|prestataire|freelancer": "user_roles.seller_service_provider",
+        "demandeur d’emploi|freelancer|candidat|sans emploi": "user_roles.job_seeker",
+        "employeur|entreprise|recrutement|recruteur": "user_roles.employer",
+        "instructeur|créateur|formateur|créateur de contenu|enseignant": "user_roles.instructor",
+        "apprenant entrepreneur|stagiaire startup|apprenant commercial|aspirant entrepreneur": "user_roles.entrepreneur_trainee",
+        "admin|administrateur|gestion|gestionnaire plateforme": "user_roles.admin",
+        "chômage|sans emploi|pas de travail|sans travail": "problems_solved.unemployment",
+        "écarts de compétences|pas de compétences|besoin de formation|manque de compétences": "problems_solved.skill_gaps",
+        "accès au marché|vendre produits|atteindre clients|marché": "problems_solved.market_access",
+        "connectivité|internet|hors ligne|accès rural|ussd|pas d’internet": "problems_solved.connectivity_barriers",
+        "rwanda|frw|mobile money|kinyarwanda|local|rwanda-first": "rwanda_first",
+        "paiement|mtn|virement bancaire|crypto|paypal|carte de crédit": "payment_methods",
+        "coût|prix|frais|combien|tarification": "monetization",
+        "feuille de route|prochaines étapes|lancement|plan|futur|calendrier": "roadmap",
+        "communauté|événements|forums|engagement|webinaires": "community",
+        "comment ça marche|s’inscrire|utiliser plateforme|processus|comment utiliser": "how_it_works",
+        "rural|village|faible internet|accessibilité|éloigné": "accessibility",
+        "rejoindre|liste d’attente|s’inscrire|enregistrer|adhérer": "join_waitlist",
+        "succès|pourquoi ça marche|avantages|impact|pourquoi rejoindre": "why_it_succeeds",
+        "technique|technologie|cloud|open source|pile technologique": "technical_details",
+        "exemple|étude de cas|histoire|jean|aline|paul|marie|histoire de succès": "example_stories",
+        "faq|questions fréquentes|aide|questions": "faq"
+      },
+      overview: "Le African Deals Domain est une plateforme transformative d’e-commerce et d’autonomisation qui sera lancée au Rwanda le 9 juin 2025. Elle connecte les communautés via le commerce numérique, les opportunités d’emploi et l’éducation, utilisant le FRW, MTN Mobile Money et les virements bancaires. Avec six modules—Diffusion, Portail d’Emploi, Portail de Formation, Produits Numériques, Services en Ligne, et Collège de Formation des Entrepreneurs—elle lutte contre le chômage, les écarts de compétences et l’accès limité au marché, favorisant la croissance économique et l’inclusion numérique. Souhaitez-vous en savoir plus sur nos modules ou rôles d’utilisateurs ?",
+      vision: "Notre vision est d’autonomiser chaque Rwandais avec des opportunités d’apprendre, de gagner et de grandir grâce à une plateforme numérique adaptée aux besoins uniques du Rwanda, stimulant le progrès économique et social.",
+      mission: "Nous visons à connecter les communautés rwandaises par le commerce numérique, les opportunités d’emploi et l’éducation, favorisant la croissance économique et l’inclusion numérique dans les zones urbaines et rurales.",
+      modules: {
+        overview: "Le African Deals Domain propose six modules interconnectés : Diffusion pour les webinaires en direct (FRW 2,000), Portail d’Emploi pour l’emploi (FRW 5,000), Portail de Formation pour le développement des compétences (FRW 10,000), Produits Numériques pour les e-books et plus (FRW 3,000), Services en Ligne pour le travail freelance (FRW 20,000), et Collège de Formation des Entrepreneurs pour les startups (FRW 50,000). Quel module vous intéresse ?",
+        broadcasting: "Le module de Diffusion permet aux utilisateurs d’organiser des webinaires ou podcasts en direct, comme un agriculteur partageant des conseils sur l’agriculture biologique pour FRW 2,000, payés via MTN Mobile Money. Cela favorise l’engagement communautaire et le partage de connaissances. Curieux de savoir comment les créateurs organisent des diffusions ?",
+        job_portal: "Le Portail d’Emploi connecte les demandeurs d’emploi comme Jean aux employeurs, les aidant à décrocher des postes comme développeur de logiciels pour FRW 500,000/mois. Les entreprises publient des offres pour FRW 5,000, recevant des candidatures immédiatement. Intéressé par le processus de candidature ?",
+        training_portal: "Le Portail de Formation propose des cours en ligne, comme le marketing numérique pour FRW 10,000, avec accès hors ligne pour les utilisateurs ruraux. Aline, une entrepreneuse rurale, a augmenté son activité de 50%. Curieux des cours disponibles ?",
+        digital_products: "Le module Produits Numériques permet aux créateurs comme Paul de vendre des e-books ou des designs pour FRW 3,000, payés via MTN Mobile Money, élargissant l’accès au marché pour les créateurs rwandais. Voulez-vous savoir comment les vendeurs listent leurs produits ?",
+        online_services: "Le module Services en Ligne est un marché de freelances où des designers ou consultants proposent des services comme la création de logos pour FRW 20,000, payés par virement bancaire ou MTN. Intéressé à devenir fournisseur de services ?",
+        entrepreneur_training: "Le Collège de Formation des Entrepreneurs propose des programmes de 12 semaines pour FRW 50,000, aidant les entrepreneurs en herbe à présenter leurs projets aux investisseurs et à développer des startups. Curieux du programme de formation ?"
+      },
+      user_roles: {
+        overview: "Notre plateforme prend en charge sept rôles d’utilisateurs : Acheteur/Apprenant, Vendeur/Fournisseur de Services, Demandeur d’Emploi, Employeur, Instructeur/Créateur, Apprenant Entrepreneur, et Administrateur, chacun avec des fonctionnalités adaptées pour autonomiser les Rwandais. Quel rôle vous intrigue ?",
+        buyer_learner: "Les Acheteurs ou Apprenants achètent des produits numériques comme des e-books pour FRW 3,000 ou des cours comme le codage pour FRW 10,000, suivant leurs progrès sur un tableau de bord. Voulez-vous savoir comment accéder aux cours hors ligne ?",
+        seller_service_provider: "Les Vendeurs ou Fournisseurs de Services proposent des biens numériques ou des services de freelance, comme des logos pour FRW 20,000, et gèrent les ventes en FRW sur un tableau de bord. Curieux de savoir comment configurer un compte vendeur ?",
+        job_seeker: "Les Demandeurs d’Emploi créent des CV en kinyarwanda ou en anglais et postulent à des emplois, comme Jean qui a trouvé un poste à FRW 500,000/mois via le Portail d’Emploi. Intéressé par le processus de candidature ?",
+        employer: "Les Employeurs publient des offres d’emploi pour FRW 5,000, examinent les candidats et embauchent des talents, comme des développeurs de logiciels à Kigali. Voulez-vous savoir comment les employeurs publient des offres ?",
+        instructor: "Les Instructeurs ou Créateurs proposent des cours ou des webinaires, comme un agriculteur organisant une diffusion à FRW 2,000 sur l’agriculture biologique, et suivent leurs revenus sur un tableau de bord. Curieux de créer du contenu ?",
+        entrepreneur_trainee: "Les Apprenants Entrepreneurs rejoignent des programmes de 12 semaines pour FRW 50,000, acquérant des compétences et un mentorat pour présenter leurs startups aux investisseurs. Voulez-vous explorer le programme de formation ?",
+        admin: "Les Administrateurs gèrent la plateforme, résolvent les litiges et assurent des opérations fluides pour tous les utilisateurs. Curieux de savoir comment les admins maintiennent l’équité ?"
+      },
+      problems_solved: {
+        unemployment: "Nous luttons contre le chômage en connectant des demandeurs d’emploi comme Jean aux employeurs via le Portail d’Emploi, les aidant à obtenir des postes comme développeur de logiciels pour FRW 500,000/mois. Voulez-vous en savoir plus sur le Portail d’Emploi ?",
+        skill_gaps: "Nous comblons les écarts de compétences avec le Portail de Formation, où des utilisateurs comme Aline apprennent le marketing numérique pour FRW 10,000, augmentant leur activité de 50%. Curieux des cours disponibles ?",
+        market_access: "Nous élargissons l’accès au marché pour les créateurs comme Paul, qui vendent des designs numériques pour FRW 3,000 sur le module Produits Numériques, payés via MTN Mobile Money. Intéressé à vendre des produits ?",
+        connectivity_barriers: "Nous surmontons les barrières de connectivité avec l’accès USSD (par exemple, *123*1# pour les emplois) et les modes hors ligne, permettant aux utilisateurs ruraux comme Marie de rejoindre l’économie numérique. Voulez-vous en savoir plus sur l’accès USSD ?"
+      },
+      rwanda_first: "Le African Deals Domain est conçu pour le Rwanda avec des transactions en FRW, des paiements via MTN Mobile Money ou virements bancaires, un support en kinyarwanda, et USSD (*123#) pour les utilisateurs ruraux avec un accès internet limité. Curieux de notre focus local ?",
+      payment_methods: "Les utilisateurs peuvent payer avec MTN Mobile Money ou virements bancaires en FRW pour plus d’accessibilité. L’intégration de crypto, PayPal et cartes de crédit est en développement pour une future expansion. Voulez-vous en savoir plus sur la sécurité des paiements ?",
+      monetization: "Nous générons des revenus grâce à des commissions de 10-20% sur les ventes, des abonnements premium pour FRW 5,000/mois, des frais de publication pour les emplois ou produits (FRW 2,000), des cours (FRW 5,000-50,000), et des diffusions payantes (FRW 1,000-10,000). Intéressé par notre modèle économique ?",
+      roadmap: "Notre feuille de route inclut le développement d’un MVP pour les portails d’Emploi et de Formation, la conception d’une interface mobile avec support kinyarwanda, la construction avec des outils open-source, des tests à Kigali et dans les zones rurales, et un lancement au Rwanda avec des plans d’expansion en Afrique de l’Est. Curieux du calendrier de lancement ?",
+      community: "Nous favorisons la communauté à travers des webinaires en direct, des forums et des événements, comme une diffusion sur l’agriculture biologique pour FRW 2,000, renforçant l’engagement au Rwanda. Curieux des événements à venir ?",
+      how_it_works: "Les utilisateurs s’inscrivent, choisissent un rôle (par exemple, Demandeur d’Emploi, Vendeur), et accèdent aux modules via une interface mobile. Les paiements utilisent MTN Mobile Money ou virements bancaires en FRW, et les utilisateurs ruraux accèdent aux fonctionnalités via USSD (*123#). Les tableaux de bord suivent les progrès, ventes ou candidatures. Voulez-vous explorer un rôle spécifique ?",
+      accessibility: "Notre plateforme garantit l’accessibilité avec USSD (par exemple, *123*1# pour les offres d’emploi) et les modes hors ligne pour les utilisateurs ruraux comme Marie avec un internet limité, plus un support en kinyarwanda pour l’inclusivité. Intéressé par les avantages pour les utilisateurs ruraux ?",
+      why_it_succeeds: "Le African Deals Domain réussira grâce à son focus sur le Rwanda (FRW, MTN Mobile Money, kinyarwanda), son inclusivité avec USSD et accès hors ligne, son infrastructure cloud pour l’expansion, et l’engagement communautaire via des événements. Voulez-vous rejoindre notre aventure ?",
+      technical_details: "La plateforme est construite avec des outils open-source pour réduire les coûts et une infrastructure cloud pour l’évolutivité. Elle prend en charge une interface mobile, un accès hors ligne et USSD pour la connectivité rurale. Curieux de notre pile technologique ?",
+      example_stories: "Notre plateforme transforme des vies : Jean a trouvé un emploi à FRW 500,000/mois via le Portail d’Emploi, Aline a augmenté son activité de 50% avec un cours à FRW 10,000, Paul a vendu des designs pour FRW 3,000, et Marie a accédé à des emplois via USSD en zone rurale. Voulez-vous en savoir plus sur une histoire spécifique ?",
+      faq: {
+        what_is_cost: "Les coûts varient selon le module : les offres d’emploi coûtent FRW 5,000, les cours vont de FRW 5,000 à 50,000, les produits numériques commencent à FRW 3,000, et les diffusions de FRW 1,000 à 10,000. Les abonnements premium sont à FRW 5,000/mois. Voulez-vous des détails sur un module spécifique ?",
+        how_to_join: "Inscrivez-vous à notre liste d’attente avec votre email et rôle préféré (par exemple, Demandeur d’Emploi, Vendeur) pour être informé au lancement. Les utilisateurs ruraux peuvent s’inscrire via USSD (*123#). Intéressé à rejoindre maintenant ?",
+        who_can_use: "Tout le monde au Rwanda peut utiliser la plateforme, des demandeurs d’emploi aux entrepreneurs, employeurs et créateurs, avec des rôles adaptés aux utilisateurs urbains et ruraux. Curieux d’un rôle spécifique ?",
+        is_it_free: "L’accès de base est gratuit, mais les fonctionnalités premium comme les abonnements (FRW 5,000/mois) ou les frais de publication (FRW 2,000) s’appliquent. Les cours et diffusions ont des coûts spécifiques. Voulez-vous en savoir plus sur les fonctionnalités gratuites ?"
+      },
+      join_waitlist: "Rejoignez notre liste d’attente pour être parmi les premiers à découvrir le African Deals Domain ! Inscrivez-vous avec votre email et votre rôle préféré (par exemple, Demandeur d’Emploi, Entrepreneur) pour rester informé de notre lancement en juin 2025. Prêt à rejoindre ?",
+      default: "Je suis là pour répondre à toutes vos questions sur le African Deals Domain ! Pouvez-vous préciser ce que vous voulez savoir sur notre plateforme, nos modules, rôles ou impact au Rwanda ?"
+    }
+  };
+
+  // Function to get AI response based on query and language
+  function getResponse(query, lang = 'en') {
+    // Ensure the language exists, default to English if not
+    if (!aiResponses[lang]) {
+      console.warn(`Language ${lang} not found, defaulting to 'en'`);
+      lang = 'en';
+    }
+
+    // Handle greeting for "hello" or empty query
+    if (!query || query.toLowerCase().trim() === 'hello') {
+      return aiResponses[lang].greeting || "Hello! I'm here to help with questions about African Deals Domain. What would you like to know?";
+    }
+
+    // Case-insensitive keyword matching
+    const lowerQuery = query.toLowerCase().trim();
+    for (const [key, value] of Object.entries(aiResponses[lang].keywords)) {
+      const keywords = key.split('|').map(k => k.trim());
+      if (keywords.some(keyword => lowerQuery.includes(keyword))) {
+        // Navigate nested response path (e.g., modules.job_portal)
+        const path = value.split('.');
+        let response = aiResponses[lang];
+        for (const part of path) {
+          if (!response[part]) {
+            console.warn(`Response path ${value} not found in ${lang}`);
+            return aiResponses[lang].default;
+          }
+          response = response[part];
+        }
+        return typeof response === 'string' ? response : aiResponses[lang].default;
+      }
+    }
+
+    // Fallback to default response if no keywords match
+    return aiResponses[lang].default;
+  }
+
+  // AI Assistant functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const aiChat = document.querySelector('.ai-chat');
+    const aiButton = document.querySelector('.ai-button');
+    const aiInput = document.getElementById('ai-input');
+    const chatMessages = document.getElementById('chat-messages');
+    const typingIndicator = document.querySelector('.typing-indicator');
+    let currentLang = document.getElementById('language')?.value || 'en';
+
+    // Initialize chatbot with greeting
+    if (aiChat && chatMessages) {
+      chatMessages.innerHTML = `<p class="text-[#00ffcc]">${aiResponses[currentLang].greeting}</p>`;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Toggle chatbot visibility
+    if (aiButton && aiChat) {
+      aiButton.addEventListener('click', () => {
+        aiChat.classList.toggle('hidden');
+        if (!aiChat.classList.contains('hidden')) {
+          chatMessages.innerHTML = `<p class="text-[#00ffcc]">${aiResponses[currentLang].greeting}</p>`;
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+      });
+    }
+
+    // Handle user input
+    if (aiInput && chatMessages && typingIndicator) {
+      aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && aiInput.value.trim()) {
+          const userMessage = aiInput.value.trim();
+          chatMessages.innerHTML += `<p class="text-right text-white">${userMessage}</p>`;
+          aiInput.value = '';
+          typingIndicator.classList.remove('hidden');
+
+          setTimeout(() => {
+            const response = getResponse(userMessage, currentLang);
+            chatMessages.innerHTML += `<p class="text-[#00ffcc]">${response}</p>`;
+            typingIndicator.classList.add('hidden');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 1000);
+        }
+      });
+    }
+
+    // Multilingual support
+    function changeLanguage() {
+      const lang = document.getElementById('language').value;
+      currentLang = lang;
+      document.querySelectorAll('[data-en]').forEach(elem => {
+        elem.textContent = elem.getAttribute(`data-${lang}`);
+      });
+      document.querySelectorAll('[data-en][placeholder]').forEach(elem => {
+        elem.placeholder = elem.getAttribute(`data-${lang}`);
+      });
+      // Reset chatbot with new language greeting
+      if (aiChat && !aiChat.classList.contains('hidden') && chatMessages) {
+        chatMessages.innerHTML = `<p class="text-[#00ffcc]">${aiResponses[currentLang].greeting}</p>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    }
+
+    // Attach language change handler
+    const languageSelect = document.getElementById('language');
+    if (languageSelect) {
+      languageSelect.addEventListener('change', changeLanguage);
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        if (!document.getElementById(targetId).classList.contains('modal')) {
+          document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Parallax effect for cards
+    document.querySelectorAll('.card-hover').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.transform = `translateY(-10px) rotateX(${y / 20}deg) rotateY(${x / 20}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+      });
+    });
+
+    // Window resize handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  });
+</script>
+</body>
+</html>
